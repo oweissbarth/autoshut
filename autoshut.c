@@ -15,9 +15,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <signal.h>
 
-static const SHUTDOWN = 0;
-static const REBOOT = 1;
+static const int SHUTDOWN = 0;
+static const int REBOOT = 1;
 
 void print_usage();
 
@@ -84,6 +87,7 @@ int main(int argc, char* args[]){
 		printf("still running..\n");
 		sleep(1);
 	}
+	return 0;
 }
 
 void print_usage(){
