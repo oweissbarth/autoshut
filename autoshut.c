@@ -76,7 +76,7 @@ int main(int argc, char* args[]){
 		if (kill(pid, 0)==-1){
 			if(mode==SHUTDOWN){
 				printf("shutting down now!\n");
-				system("shutdown -P now");
+				system("shutdown -hP now");
 				return 1;
 			}else{
 				printf("rebooting down now!\n");
