@@ -8,4 +8,4 @@ clean:
 	rm autoshut
 	
 install: all
-	install autoshut /usr/bin
+	install autoshut /usr/local/bin

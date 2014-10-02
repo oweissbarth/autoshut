@@ -71,23 +71,30 @@ int main(int argc, char* args[]){
 		printf("Will reboot when %d ended...\n",pid);
 	}
 	
-	while(1){
+	int mypid;
+	if((mypid = fork()) < 0){
+		return -1;
+	}else if(mypid!=0){
+		exit(0);
+	}else{
+		setsid();
+		while(1){
 		
-		if (kill(pid, 0)==-1){
-			if(mode==SHUTDOWN){
-				printf("shutting down now!\n");
-				system("shutdown -hP now");
-				return 1;
-			}else{
-				printf("rebooting down now!\n");
-				system("shutdown -r now");
+			if (kill(pid, 0)==-1){
+				if(mode==SHUTDOWN){
+					printf("shutting down now!\n");
+					system("shutdown -hP now");
+					return 1;
+				}else{
+					printf("rebooting now!\n");
+					system("shutdown -r now");
+				}
+				break;
 			}
-			break;
+			sleep(1);
 		}
-		printf("still running..\n");
-		sleep(1);
+		return 0;
 	}
-	return 0;
 }
 
 void print_usage(){
